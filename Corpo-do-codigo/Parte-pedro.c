@@ -3,14 +3,14 @@
 #include <time.h>
 #include <string.h>
 
-//Definição de constantes e struct
+// Definição de constantes
 
 #define MAX 8
 #define MINAS_CURTO 2
 #define MINAS_MEDIO 6
 #define MINAS_LONGO 10
 
-//struct celula
+// Struct que representa cada célula do tabuleiro
 
 typedef struct
 {
@@ -19,31 +19,27 @@ typedef struct
     char dono;
 } Celula;
 
-//declaração do tabuleiro
+// Variáveis globais do tabuleiro
 
 Celula tabuleiro[MAX][MAX];
 int tamanhoTabuleiro;
 int totalMinas;
 
-//Funções de Manipulação
-//1 Conversão de Letra para Índice
+// Converte letra da coluna (ex: 'A') para índice da matriz
 
 int letraParaIndice(char letra)
 {
     return letra - 'A';
 }
 
-//2 Inicialização do Tabuleiro
+// Inicializa o tabuleiro: zera todas as células e distribui as minas aleatoriamente
 
 void inicializarTabuleiro(int tamanho, int minas)
 {
-    //a Define o tamanho e quantidade de minas
-    
     tamanhoTabuleiro = tamanho;
     totalMinas = minas;
-    
-//b Preenche todo o tabuleiro zerado
-    
+
+    // Preenche todo o tabuleiro zerado
     for (int i = 0; i < tamanho; i++)
     {
         for (int j = 0; j < tamanho; j++)
@@ -53,8 +49,8 @@ void inicializarTabuleiro(int tamanho, int minas)
             tabuleiro[i][j].dono = ' ';
         }
     }
-//c Distribui as minas de forma aleatória
-    
+
+    // Distribui as minas de forma aleatória
     int colocadas = 0;
     while (colocadas < minas)
     {
@@ -68,7 +64,7 @@ void inicializarTabuleiro(int tamanho, int minas)
     }
 }
 
-//3 Mostrar o Tabuleiro (Modo Debug)
+// Exibe o tabuleiro no terminal (modo debug)
 
 void mostrarTabuleiroDebug()
 {
@@ -100,40 +96,35 @@ void mostrarTabuleiroDebug()
     }
 }
 
-//4 Revelar Célula
+// Revela uma célula do tabuleiro
+// Retorna:  1 = mina encontrada | 0 = célula segura | -1 = fora do tabuleiro | -2 = já revelada
 
 int revelarCelula(char jogador, char colunaLetra, int linha)
 {
-    
-    //a Converte a entrada do jogador para índices da matriz
-    
+    // Converte a entrada do jogador para índices da matriz
     int i = linha - 1;
     int j = letraParaIndice(colunaLetra);
 
-//b Valida se está dentro do tabuleiro
-    
+    // Valida se está dentro do tabuleiro
     if (i < 0 || i >= tamanhoTabuleiro || j < 0 || j >= tamanhoTabuleiro)
         return -1;
 
-//c verifica se a célula já foi revelada
-    
+    // Verifica se a célula já foi revelada
     if (tabuleiro[i][j].revelado)
         return -2;
 
-//d Revela a célula e marca o dono
-    
+    // Revela a célula e marca o dono
     tabuleiro[i][j].revelado = 1;
     tabuleiro[i][j].dono = jogador;
 
-//e Retorna: 1 se o jogador revelou uma mina (perde ponto). 0 se a célula era segura. -1 se jogada inválida (fora do tabuleiro). -2 se célula já estava revelada
-    
     if (tabuleiro[i][j].temMina)
         return 1;
     else
         return 0;
 }
-//Resumo do que eu fiz
-//Criei a estrutura do tabuleiro e das células.
-//Implementei o sistema de inicialização e distribuição aleatória das minas.
-//Garanti a visualização do tabuleiro para debug.
-//Fiz a lógica básica que permite o jogador jogar revelando células e identificando se pisou em mina ou não.
+
+// Resumo da etapa (Pedro):
+// - Estrutura do tabuleiro e das células (struct Celula)
+// - Inicialização e distribuição aleatória das minas
+// - Visualização do tabuleiro no terminal (modo debug)
+// - Lógica de revelação de células com validação de jogada
