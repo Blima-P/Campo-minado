@@ -86,16 +86,10 @@ Cada thread de jogador verifica se é sua vez (`turno == jogadorID`). Se não fo
 
 ```
 Campo-minado/
-├── .vscode/                    # Configurações do VS Code
-│   ├── c_cpp_properties.json   # Configuração do IntelliSense (GCC)
-│   ├── launch.json             # Configuração de debug (GDB)
-│   └── settings.json           # Configuração do C/C++ Runner
 ├── Corpo-do-codigo/
 │   ├── Parte-pedro.c           # Etapa 2: Tabuleiro e lógica base
 │   ├── Parte-Nicole.c          # Etapa 3: Implementação de threads (mutex/cond)
-│   ├── Parte-Livia.c           # Etapa 4: Versão final com semáforos e timer
-│   ├── jogo.exe                # Executável compilado
-│   └── Jogo-completo.zip       # Código compactado
+│   └── Parte-Livia.c           # Etapa 4: Versão final com semáforos e timer
 ├── Etapas/
 │   ├── 1-Planejamento e Estruturas do Jogo
 │   ├── 2-Implementação do Tabuleiro e Lógica Base
@@ -103,6 +97,7 @@ Campo-minado/
 │   ├── 4-Sincronização com Semáforos
 │   ├── 5-Testes e Ajustes Finais
 │   └── 6-Preparação da Apresentação
+├── .gitignore
 └── README.md
 ```
 
@@ -135,6 +130,8 @@ gcc -o jogo Corpo-do-codigo/Parte-Livia.c -lpthread
 ./jogo
 ```
 
+> O executável para Windows entregue no trabalho está disponível na página de [Releases](https://github.com/Blima-P/Campo-minado/releases).
+>
 > **Nota:** No Windows, recomenda-se usar o **MSYS2** (MinGW) ou **WSL** para compilar, pois o código utiliza APIs POSIX (`pthread`, `semaphore`, `unistd.h`).
 
 ---

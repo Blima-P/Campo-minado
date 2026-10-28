@@ -1,0 +1,13 @@
+# Binários e artefatos de compilação
+*.exe
+*.o
+*.out
+jogo
+build/
+
+# Arquivos compactados
+*.zip
+
+# Configurações locais de IDE
+.vscode/
+.idea/
